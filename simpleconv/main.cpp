@@ -63,8 +63,6 @@ int main(int argc, char** argv) {
 //  local functions
 void help(){
 	cout << "Processiong of SIMPLE-seq data, modified from Paired-seq/Tag 2-round ligation barcodes." << "\nVersion: " << version << " (cxzhu@pku.edu.cn)" << endl;
-	cout << endl <<"\tcombine\ti\tCombine Read1 with Read2, extract BC and UMI to a merged fastq file." << endl;
-	cout << "\tconvert\t\tAfter mapping combined fastq to BC index, convert the resulting SAM file to fastq file ready for mapping." << endl;
 	return;
 }
 
@@ -141,54 +139,6 @@ void combine2(string r2, string ty){
 }
 void combine2_help(){
 	cout << "simpleconv combine sample_Prefix gz/bz2(default gz)" << endl;
-}
-
-
-void convert2(string prefix){
-	// processing SIMPLE-seq with 2-round ligation
-	int total = 0;
-	int pass = 0;
-	string s1 = "cat ";
-	string s2 = prefix;
-	string s3 = s1 + s2;
-	FILE * inbam;
-	inbam = popen(s3.c_str(), "r");
-	s1 = "gzip - > ";
-	s2 = prefix.substr(0, prefix.length()-4) + "_cov.fq.gz";
-	s3 = s1 + s2;
-	FILE * fout;
-	fout = popen(s3.c_str(), "w");
-	samline align_line;
-	fqline fastq_line;
-	char buffer[2000];
-	while(fgets(buffer, sizeof(buffer), inbam)){
-		++total;
-		string line(buffer);
-		line=cxstring::chomp(line);
-		if(line.substr(0, 1) == "@"){
-			continue;
-		}
-		align_line.init(line);
-		if(align_line.chr == "*")continue;
-		vector<string> tmp = cxstring::split(align_line.readname, ":");
-		fastq_line.readname = "@" + tmp[0] + ":" + tmp[1] + ":" + tmp[2] + ":" + tmp[3] + ":" + tmp[4] + ":" + tmp[5] + ":" + tmp[6] + ":" +  align_line.chr + ":" + tmp[7];
-		fastq_line.seq = tmp[8];
-		//fastq_line.qual = tmp[9];
-		fastq_line.qual = align_line.readname.substr(align_line.readname.length()-tmp[8].length(), tmp[8].length()); // fix bug for NovaSeq
-		fastq_line.mark = "+";
-		fastq_line.write_record(fout);
-		++pass;
-	}
-	pclose(inbam);
-	pclose(fout);
-	cout << total << " reads processed." << endl;
-	cout << pass << " mapped reads." << endl;
-	return;
-}
-void convert2_help(){
-	cout << "simpleconv convert BC_align.sam" << endl;
-	return;
-
 }
 
 
