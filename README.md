@@ -58,7 +58,7 @@ Three files will be generated, including <code>[sample_sorted.bam_5mC.bam], [sam
 ## 4. Generate cell-to-modification abundance matrices
 This step will convert the bam files to an intermediate modification information file and then generate cell-to-modification abundance matrices.
 
-Step.1 <code>perl perlscript/03.bam2srf.pl [sample_sorted.bam_5mC/5hmC.bam]</code>.
+Step.1 <code>perl perlscripts/03.bam2srf.pl [sample_sorted.bam_5mC/5hmC.bam]</code>.
 
 Step.2 <code>perl perlscripts/04.srf2mtx.pl [input.rsf] [binsize]</code>.
 
