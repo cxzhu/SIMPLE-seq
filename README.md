@@ -51,7 +51,7 @@ Use <code>sh shellscrips/02.proc_mapping.sh [sample_prefix]</code>.
 ## 3. Split the alignment files to 5mC and 5hmC
 This step is to split 5mC and 5hmC reads to seperate alignment files (bam files) based on the indicator sequences.
 
-Use <code>perl perlscript/02.split_modality.pl [sample_sorted.bam]</code>.
+Use <code>perl perlscripts/02.split_modality.pl [sample_sorted.bam]</code>.
 
 Three files will be generated, including <code>[sample_sorted.bam_5mC.bam], [sample_sorted.bam_5hmC.bam] and [sample_sorted.bam_other.bam] </code>. Reads cannot be perfectly assigned to 5mC or 5hmC will be written to "XXX_other.bam".
 
