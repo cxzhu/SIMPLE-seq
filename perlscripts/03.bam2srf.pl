@@ -46,7 +46,7 @@ while(<IN>){
 	my $p = $tmp[3];
 	my $cigar = $tmp[5];
 	my $seq = $tmp[9];
-	my @sp = split/\[A-Z]/, $cigar;
+	my @sp = split/[A-Z]/, $cigar;
 	my $total_cp = 0;
 	my $total_len = 0;
 
