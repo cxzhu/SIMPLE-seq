@@ -18,8 +18,7 @@ void help();
 void combine(string sample);
 void combine2(string sample, string ty);
 void combine2_help();
-void convert2(string sample);
-void convert2_help();
+
 
 string version = "2020.03.11";
 
