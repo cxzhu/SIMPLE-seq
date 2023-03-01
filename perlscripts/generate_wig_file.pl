@@ -49,7 +49,7 @@ foreach my $type (keys %hash){
 			my $spos = $pos*$bs+1;
 			my $m = $hash{$type}{$chr}{$pos}{"methy"};
 			my $t = $hash{$type}{$chr}{$pos}{"total"};
-			my $value = int($m / $t * 100);
+			my $value = int($m *10000 / $t)/100;
 			print OUT "$spos\t$value\n";
 		}
 	}
