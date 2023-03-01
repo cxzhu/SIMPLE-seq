@@ -28,7 +28,8 @@ while(<IN>){
 #	}
 	if($illumina==1){
 		$read1 = $sp[8];
-		$qual1 = $sp[9];
+		my $len = length($read1);
+		$qual1 = substr($tmp[0], -$len, $len); 
 	}
 
 	
