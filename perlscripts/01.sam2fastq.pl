@@ -35,7 +35,10 @@ while(<IN>){
 # 	}
 
 # updated 03-25-2024
-	my $trunc = substr($tmp[0], length($sp[0]), length($tmp[0])-length($sp[0])); ### string containing R1 and R1_qual.
+	my $raw_rn = $sp[0]; #readname
+ 	my $umi = $sp[1]; ## umi from simpleconv combine/combine3
+  	my $cov_rn = "$raw_rn\:$umi"; 
+	my $trunc = substr($tmp[0], length($cov_rn), length($tmp[0])-length($cov_rn)); ### string containing R1 and R1_qual.
  	my $length = int((length($trunc) -1)/2); ## round up to the read length as length(R1 + ":" + R1_quil) - 1 /2.
 
    	my $read1 = substr($trunc, 0, $length); ## first half is R1
@@ -50,7 +53,7 @@ while(<IN>){
 	# $rname = "\@$sp[0]\:$sp[1]\:$sp[2]\:$sp[3]\:$sp[4]\:$sp[5]\:$sp[6]\:$sp[7]\:$pre\:$cid" if $illumina==1;
 
   	# updated 03-25-2024 to to compatible with GEO processed rnames.
-   	$rname = "\@$sp[0]\:$pre\:$cid";
+   	$rname = "\@$cov_rn\:$pre\:$cid";
 	print OUT "$rname\n$read1_s\n+\n$qual1_s\n";
 }
 close IN;
