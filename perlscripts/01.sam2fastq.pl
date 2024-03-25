@@ -45,8 +45,12 @@ while(<IN>){
 	my $read1_s = substr($read1, 6, length($read1)-6);
 	my $qual1_s = substr($qual1, 6, length($qual1)-6);
 	my $rname = "";
-	$rname = "\@$sp[0]\:$sp[1]\:$pre\:$cid" if $illumina == 0;
-	$rname = "\@$sp[0]\:$sp[1]\:$sp[2]\:$sp[3]\:$sp[4]\:$sp[5]\:$sp[6]\:$sp[7]\:$pre\:$cid" if $illumina==1;
+ 	# outdated as it only compatible with raw BGI/Illumina read names.
+	# $rname = "\@$sp[0]\:$sp[1]\:$pre\:$cid" if $illumina == 0;
+	# $rname = "\@$sp[0]\:$sp[1]\:$sp[2]\:$sp[3]\:$sp[4]\:$sp[5]\:$sp[6]\:$sp[7]\:$pre\:$cid" if $illumina==1;
+
+  	# updated 03-25-2024 to to compatible with GEO processed rnames.
+   	$rname = "\@$sp[0]\:$pre\:$cid";
 	print OUT "$rname\n$read1_s\n+\n$qual1_s\n";
 }
 close IN;
