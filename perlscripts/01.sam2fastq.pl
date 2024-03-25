@@ -41,7 +41,7 @@ while(<IN>){
 	my $trunc = substr($tmp[0], length($cov_rn), length($tmp[0])-length($cov_rn)); ### string containing R1 and R1_qual.
  	my $length = int((length($trunc) -1)/2); ## round up to the read length as length(R1 + ":" + R1_quil) - 1 /2.
 
-   	my $read1 = substr($trunc, 0, $length); ## first half is R1
+   	my $read1 = substr($trunc, 1, $length); ## first half is R1
     	my $qual1 = substr($trunc, -$length, $length);  ## second half is R1_qual
 	
 	my $pre = substr($read1, 0, 6);
