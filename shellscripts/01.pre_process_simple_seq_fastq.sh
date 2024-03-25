@@ -1,5 +1,5 @@
 s=$1 # with ${s}_R1.fq.gz and ${s}_R2.fq.gz in the working directory
-p="path-to-cell-id-reference" # reference file is in "Cell_BC_reference/cell_id" of github directory
+p="path-to-cell-id-reference" # reference file is in "Cell_BC_reference/" of github directory, "cell_id" for mESC and PBMC, "SIMPLE_Brain_ID" for brain.
 simpleconv combine ${s}
 
 ### version for bowtie will chage for use of this step
