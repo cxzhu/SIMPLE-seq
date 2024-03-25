@@ -13,25 +13,33 @@ while(<IN>){
 	my $cid = $tmp[2];
 	next if $cid eq '*';
 	my @sp = split/\:/, $tmp[0];
-	my $if_modified_length = 1;
-	if($if_modified_length == 0){
-		print STDERR "Please modify the parameters in lines 25-28.\n";
-		exit;
-	}
+ # updated to compatible with GEO processed read names.
+# 	my $if_modified_length = 0;
+# 	if($if_modified_length == 0){
+# 		print STDERR "Please modify the parameters in lines 25-28.\n";
+#   	### after setting up the paramters, please change line 16 $if_modified_length = 1.
+# 		exit;
+# 	}
 
-	my $illumina = 1;
-	my $read1="";
-	my $qual1="";
-#	if($illumina == 0){
-#my $read1 = substr($tmp[0], 52, 50); ### for BGI-seq data only; if illumina, modify the length based on read name format
-#	my $qual1 = substr($tmp[0], 103, 50); ### for BGI-seq data only; if illumina, modify the length based on read name format
-#	}
-	if($illumina==1){
-		$read1 = $sp[8];
-		my $len = length($read1);
-		$qual1 = substr($tmp[0], -$len, $len); 
-	}
+# 	my $illumina = 1;
+# 	my $read1="";
+# 	my $qual1="";
+# #	if($illumina == 0){
+# #my $read1 = substr($tmp[0], 52, 50); ### for BGI-seq data only; if illumina, modify the length based on read name format
+# #	my $qual1 = substr($tmp[0], 103, 50); ### for BGI-seq data only; if illumina, modify the length based on read name format
+# #	}
+# 	if($illumina==1){
+# 		$read1 = $sp[8];
+# 		my $len = length($read1);
+# 		$qual1 = substr($tmp[0], -$len, $len); 
+# 	}
 
+# updated 03-25-2024
+	my $trunc = substr($tmp[0], length($sp[0]), length($tmp[0])-length($sp[0])); ### string containing R1 and R1_qual.
+ 	my $length = int((length($trunc) -1)/2); ## round up to the read length as length(R1 + ":" + R1_quil) - 1 /2.
+
+   	my $read1 = substr($trunc, 0, $length); ## first half is R1
+    	my $qual1 = substr($trunc, -$length, $length);  ## second half is R1_qual
 	
 	my $pre = substr($read1, 0, 6);
 	my $read1_s = substr($read1, 6, length($read1)-6);
