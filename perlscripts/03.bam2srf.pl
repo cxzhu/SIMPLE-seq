@@ -42,7 +42,7 @@ my $chr_length = 0;
 while(<IN>){
 	chomp;
 	my @tmp = split/\s+/, $_;
-	my $chr = $tmp [2];
+	my $chr = $tmp[2];
 	my $p = $tmp[3];
 	my $cigar = $tmp[5];
 	my $seq = $tmp[9];
