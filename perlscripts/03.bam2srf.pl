@@ -83,7 +83,7 @@ while(<IN>){
 
 	$meta = $p + 1000000 if $meta == 0;
 	if( ($cur_chr ne $chr or $p > $meta)){
-		if($cur_chr ne "" or $p > $meta){
+		if($cur_chr ne ""){
 			## output hash
 			# 1 output cpg;
 			foreach my $pos (keys %cpg){
@@ -92,7 +92,7 @@ while(<IN>){
 					my $tot = $cpg{$pos}{$bc}{"tot"};
 					my $methylated = 0;
 					$methylated = 1 if $c2t/$tot > 0.5;
-					my $output = "$bc\t$chr\t$pos\t$tot\t$c2t\t$methylated\n";
+					my $output = "$bc\$cur_chr\t$pos\t$tot\t$c2t\t$methylated\n";
 					print OUT_CPG $output;
 				}
 			}
@@ -103,7 +103,7 @@ while(<IN>){
 					my $tot = $chg{$pos}{$bc}{"tot"};
 					my $methylated = 0;
 					$methylated = 1 if $c2t/$tot > 0.5;
-					my $output = "$bc\t$chr\t$pos\t$tot\t$c2t\t$methylated\n";
+					my $output = "$bc\$cur_chr\t$pos\t$tot\t$c2t\t$methylated\n";
 					print OUT_CHG $output;
 				}
 			}			
@@ -114,7 +114,7 @@ while(<IN>){
 					my $tot = $chh{$pos}{$bc}{"tot"};
 					my $methylated = 0;
 					$methylated = 1 if $c2t/$tot > 0.5;
-					my $output = "$bc\t$chr\t$pos\t$tot\t$c2t\t$methylated\n";
+					my $output = "$bc\$cur_chr\t$pos\t$tot\t$c2t\t$methylated\n";
 					print OUT_CHH $output;
 				}
 			}			
