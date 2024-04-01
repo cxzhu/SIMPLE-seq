@@ -92,7 +92,7 @@ while(<IN>){
 					my $tot = $cpg{$pos}{$bc}{"tot"};
 					my $methylated = 0;
 					$methylated = 1 if $c2t/$tot > 0.5;
-					my $output = "$bc\$cur_chr\t$pos\t$tot\t$c2t\t$methylated\n";
+					my $output = "$bc\t$cur_chr\t$pos\t$tot\t$c2t\t$methylated\n";
 					print OUT_CPG $output;
 				}
 			}
@@ -103,7 +103,7 @@ while(<IN>){
 					my $tot = $chg{$pos}{$bc}{"tot"};
 					my $methylated = 0;
 					$methylated = 1 if $c2t/$tot > 0.5;
-					my $output = "$bc\$cur_chr\t$pos\t$tot\t$c2t\t$methylated\n";
+					my $output = "$bc\t$cur_chr\t$pos\t$tot\t$c2t\t$methylated\n";
 					print OUT_CHG $output;
 				}
 			}			
@@ -114,7 +114,7 @@ while(<IN>){
 					my $tot = $chh{$pos}{$bc}{"tot"};
 					my $methylated = 0;
 					$methylated = 1 if $c2t/$tot > 0.5;
-					my $output = "$bc\$cur_chr\t$pos\t$tot\t$c2t\t$methylated\n";
+					my $output = "$bc\t$cur_chr\t$pos\t$tot\t$c2t\t$methylated\n";
 					print OUT_CHH $output;
 				}
 			}			
