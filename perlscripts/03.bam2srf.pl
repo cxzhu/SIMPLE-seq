@@ -27,11 +27,37 @@ print STDERR "Read reference file finished...\n";
 open IN, "samtools view $ARGV[0]|" or die $!;
 my $prefix = substr($ARGV[0], 0, length($ARGV[0])-4);
 
+my $file_snp = "";
+if($ARGV >= 2){
+	$file_snp = $ARGV[1]; ### snp position txt files
+	### chr pos <- 2 columns
+}
+
+my $used_snp = 0;
+if($file_snp != ""){
+	$used_snp = 1;
+}
+
+my %snp;
+
+if($used_snp == 1){
+	if(substr($file_snp, -2, 2) eq "gz"){
+		open IN, "zcat $file_snp" or die $!;
+	}
+	else{
+		open IN, "$file_snp" or die $!;
+	}
+	while(<IN>){
+		my @tmp = split/\s+/, $_;
+		$snp{$tmp[0]}{$tmp[1]} = 1;
+	}
+	close IN;
+}
 
 
-open OUT_CPG, "|gzip - >$prefix\_CPG.srf" or die $!;
-open OUT_CHG, "|gzip - >$prefix\_CHG.srf" or die $!;
-open OUT_CHH, "|gzip - >$prefix\_CHH.srf" or die $!;
+open OUT_CPG, "|gzip - >$prefix\_CPG.txt.gz" or die $!;
+open OUT_CHG, "|gzip - >$prefix\_CHG.txt.gz" or die $!;
+open OUT_CHH, "|gzip - >$prefix\_CHH.txt.gz" or die $!;
 
 my $cur_chr = "";
 my %cpg;
@@ -138,6 +164,9 @@ while(<IN>){
 		my $cur_pos = $cur_p + $p;
 		my $base = substr($seq, $cur_p, 1);
 		my $cur_base = uc(substr($fa{$chr}, $cur_pos-1, 1));
+		my $cur_pos_m1 = $cur_pos - 1;
+		next if ($used_snp == 1 && exists $snp{$chr}{$cur_pos_m1});
+		if($used_snp == 1)
 		if($cur_base eq 'C'){
 			my $p1 = uc(substr($fa{$chr}, $cur_pos, 1));
 			if($p1 eq 'G'){
