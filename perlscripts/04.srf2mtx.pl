@@ -7,7 +7,7 @@ use warnings;
 # value = percent methylation [0,100]
 
 if($#ARGV<1){
-	print "perl perlscripts/04.srf2mtx.pl input.rsf binsize\n";
+	print "perl perlscripts/04.srf2mtx.pl input.txt.gz binsize\n";
 	exit();
 }
 
