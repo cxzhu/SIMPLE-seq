@@ -62,14 +62,15 @@ Step.1 <code>perl perlscripts/03.bam2srf.pl [sample_sorted.bam_5mC/5hmC.bam]</co
 
 > [!NOTE]
 > This step will generate the compressed text files containing all methylation calling information at base resolution for single cells. Therefore, the size of the sparse matrix is not suitable for loading into memory. These files are primarily used to generate cell-to-bin matrices of different bin sizes. The base-resolution modification level can also be retrieved by looking for the specific regions/sites and cells.
-
-Formate of the SRF file (.txt.gz)
-<code>
-#col1	col2	col3	col4	col5	col6
-Barcodes	chrom	coord	depth	c2t_counts	is_methylated
-</code>
-
-> [!NOTE]
+> 
+> Formate of the SRF file (.txt.gz)
+>
+> <code>
+> #col1	col2	col3	col4	col5	col6
+>
+> Barcodes	chrom	coord	depth	c2t_counts	is_methylated
+> </code>
+>
 > It is optionally to include a "blacklist" of SNPs to be excluded for 5mC/5hmC calling. Use <code> perl perlscripts/03.bam2srf.pl [sample_sorted.bam_5mC/5hmC.bam] sites_to_exclude.txt.gz </code>
 > An example mm10 SNP142 common variatns is provided (mm10_snp142Common_reduced.txt.gz)
 
