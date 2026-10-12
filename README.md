@@ -65,16 +65,15 @@ Step.1 <code>perl perlscripts/03.bam2srf.pl [sample_sorted.bam_5mC/5hmC.bam]</co
 > 
 > Formate of the SRF file (.txt.gz)
 >
-> <code>
-> #col1	col2	col3	col4	col5	col6
->
+> <code>#col1	col2	col3	col4	col5	col6
+> 
 > Barcodes	chrom	coord	depth	c2t_counts	is_methylated
 > </code>
 >
 > It is optionally to include a "blacklist" of SNPs to be excluded for 5mC/5hmC calling. Use <code> perl perlscripts/03.bam2srf.pl [sample_sorted.bam_5mC/5hmC.bam] sites_to_exclude.txt.gz </code>
-> An example mm10 SNP142 common variatns is provided (mm10_snp142Common_reduced.txt.gz)
+> An example mm10 SNP142 common variants in chromsome 1 is provided (mm10_snp142Common_chr1.txt.gz)
 
 
-Step.2 <code>perl perlscripts/04.srf2mtx.pl [input.rsf] [binsize]</code>.
+Step.2 <code>perl perlscripts/04.srf2mtx.pl [input.txt.gz] [binsize]</code>.
 
 The resulting matrix can be used for downstream single-cell analysis.
